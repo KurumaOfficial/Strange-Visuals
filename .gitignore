@@ -1,24 +1,27 @@
-build/
-bin/
+# Gradle & Build caches
+source/.gradle/
+source/build/
+source/out/
 .gradle/
-.idea/
+build/
 out/
-*.iml
-*.class
-logs/
-run/
-crash-reports/
-hs_err_pid*
-replay_pid*
-win32-x86-64/
 
-# Common extras
+# Compiled jars at root
+*.jar
+
+# IDE files
+.idea/
+*.iml
+*.ipr
+*.iws
 .vscode/
+
+# Runtime test runs
+run/
+logs/
+*.log
+
+# OS generated files
 .DS_Store
 Thumbs.db
-*.log
-*.tmp
-*.jar
-libs/
-.env
-.aider*
+desktop.ini

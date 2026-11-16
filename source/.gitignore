@@ -1,0 +1,34 @@
+# Gradle & Build caches
+.gradle/
+build/
+out/
+
+# IDE files
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+.classpath
+.project
+.settings/
+
+# Runtime test runs
+run/
+logs/
+*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Asset pipeline working dirs (regenerable caches, unpacked 3rd-party jars,
+# quarantined dead shaders pending final deletion) — never commit
+tools/cache/
+tools/cache2/
+tools/cache_noice/
+tools/cache_noice_enhanced/
+tools/extracted/
+tools/_dead_shaders_backup/
+*.tmp

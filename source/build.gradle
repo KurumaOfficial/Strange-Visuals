@@ -1,0 +1,75 @@
+plugins {
+    id 'fabric-loom' version '1.15.5'
+    id 'maven-publish'
+}
+
+// Version bumping is opt-in via -PbumpVersion to ensure clean reproducible open-source builds
+if (project.hasProperty('bumpVersion')) {
+    def propsFile = file('gradle.properties')
+    if (propsFile.exists()) {
+        def text = propsFile.getText('UTF-8')
+        def matcher = (text =~ /mod_version\s*=\s*([0-9]+)\.([0-9]+)\.([0-9]+)/)
+        if (matcher.find()) {
+            def major = matcher.group(1)
+            def minor = matcher.group(2)
+            def patch = (matcher.group(3) as int) + 1
+            def newVersion = "${major}.${minor}.${patch}"
+            def updatedText = matcher.replaceFirst("mod_version=${newVersion}")
+            propsFile.setText(updatedText, 'UTF-8')
+            project.extensions.extraProperties.set('mod_version', newVersion)
+            println "=========================================================="
+            println " [StrangeVisuals] Bumped patch version to: ${newVersion}"
+            println "=========================================================="
+        }
+    }
+}
+
+version = project.mod_version
+group = project.maven_group
+
+base {
+    archivesName = project.archives_base_name
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    minecraft "com.mojang:minecraft:${project.minecraft_version}"
+    mappings "net.fabricmc:yarn:${project.yarn_mappings}:v2"
+    modImplementation "net.fabricmc:fabric-loader:${project.loader_version}"
+    modImplementation "net.fabricmc.fabric-api:fabric-api:${project.fabric_version}"
+}
+
+processResources {
+    inputs.property 'version', project.version
+    filesMatching('fabric.mod.json') {
+        expand 'version': inputs.properties.version
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+    options.release = 21
+}
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_21
+    targetCompatibility = JavaVersion.VERSION_21
+}
+
+remapJar.doLast {
+    def modsDir = project.hasProperty('multiMcModsDir')
+        ? file(project.property('multiMcModsDir'))
+        : file('D:/MultiMC/instances/1.21.111/.minecraft/mods')
+    if (modsDir.exists()) {
+        copy {
+            from remapJar.archiveFile
+            into modsDir
+        }
+        println "=========================================================="
+        println " [StrangeVisuals] Copied ${remapJar.archiveFile.get().asFile.name} to ${modsDir.absolutePath}!"
+        println "=========================================================="
+    }
+}

@@ -1,0 +1,34 @@
+{
+  "ui.open": {
+    "sounds": [
+      {
+        "name": "strangevisuals:ui/open",
+        "stream": false
+      }
+    ]
+  },
+  "ui.back": {
+    "sounds": [
+      {
+        "name": "strangevisuals:ui/back",
+        "stream": false
+      }
+    ]
+  },
+  "ui.toggle_on": {
+    "sounds": [
+      {
+        "name": "strangevisuals:ui/toggle_on",
+        "stream": false
+      }
+    ]
+  },
+  "ui.toggle_off": {
+    "sounds": [
+      {
+        "name": "strangevisuals:ui/toggle_off",
+        "stream": false
+      }
+    ]
+  }
+}

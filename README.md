@@ -1,26 +1,28 @@
-# Strange Visuals NEW
+# Strange Visuals
 
-Current branch after the update and refactor pass.
+Visual client mod for Minecraft Fabric 1.21.11.
 
 ## Requirements
-
-- JDK 21
-- Windows PowerShell or any shell that can run `gradlew`
+- **JDK 21+**
+- **Fabric Loader 0.19.1+**
 
 ## Build
 
-```powershell
-$env:JAVA_HOME='C:\Program Files\Java\jdk-21'
-$env:Path="$env:JAVA_HOME\bin;$env:Path"
+```bash
+cd source
+
+# Windows
 .\gradlew.bat build
+
+# Linux / macOS
+./gradlew build
 ```
 
-## Notes
+The compiled JAR will be located in `source/build/libs/`.
 
-- The project targets Java 21 through Gradle toolchains.
-- `mod_version` is managed from `gradle.properties`.
-- `fabric.mod.json` uses the Gradle-expanded `${version}` placeholder.
-- Active source set: `src/client`.
-- `src1` is a legacy snapshot and is not part of the current Loom build.
-- Development runtime data lives in `run/` and should not be treated as source code.
-- Build artifacts are produced in `build/libs/`.
+## Keybinds
+- `Right Shift` — ClickGUI
+- `Insert` — Switch background panorama
+
+## Config
+Configuration is saved to `.minecraft/config/strangevisuals_config.json`.
